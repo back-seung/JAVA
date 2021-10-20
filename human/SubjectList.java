@@ -1,14 +1,18 @@
 package human;
 
+import java.util.ArrayList;
+
 public class SubjectList {
-	String[] subject = { "java", "c", "html" };
+	ArrayList<String> subjectList = new ArrayList<>();
+	ArrayList<String> PF = new ArrayList<String>();
+	ArrayList<String> classes = new ArrayList<String>();
 
 	public void menu() {
 		System.out.println("1. 교과목 추가 ");
-		System.out.println("1. 교과목 보기 ");
+		System.out.println("2. 교과목 보기 ");
 	}
 
-	public String[] getSubject() {
-		return subject;
+	public ArrayList<String> getSubject() {
+		return subjectList;
 	}
 }
