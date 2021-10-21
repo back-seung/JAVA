@@ -1,7 +1,7 @@
 package pcBang;
 
 public class priceList {
-	String price = null;
-	String time = null;
+	int price = 0;
+	int time = 0;
 
 }
