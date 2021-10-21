@@ -6,7 +6,4 @@ public class Main {
 		new Admin();
 	}
 
-//	public int calcTime(int t) {
-//		return t*1000;
-//	}
 }

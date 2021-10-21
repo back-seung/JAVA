@@ -10,8 +10,7 @@ public class User {
 	ArrayList<priceList> pList = null;
 	priceList myList = new priceList();
 
-	User(ArrayList<priceList> p, int w) {
-		myList.price = w;
+	User(ArrayList<priceList> p) {
 		pList = p;
 	}
 
@@ -24,7 +23,7 @@ public class User {
 			System.out.println("");
 		}
 		while (true) {
-			
+
 			System.out.println("충전하시겠습니까?");
 			System.out.println("1 : 충전  /  2 : 남은시간 조회  /  3 : 로그아웃");
 			String selNum = sc.nextLine();
@@ -48,7 +47,7 @@ public class User {
 				myList.price += pList.get(i).price;
 			}
 		}
-		System.out.println("지불 금액 : " + myList.price);
+		System.out.println("현재까지 총 지불 금액 : " + myList.price);
 	}
 
 	public void viewTime() {

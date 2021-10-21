@@ -49,7 +49,6 @@ public class Admin {
 				}
 			}
 		}
-
 	}
 
 	private void addPrice() {
@@ -66,7 +65,7 @@ public class Admin {
 	}
 
 	private void register() {
-		User user = new User(prices, wallet);
+		User user = new User(prices);
 		System.out.println("이름 입력 : ");
 		user.name = sc.nextLine();
 		System.out.println("휴대폰 뒷번호 4자리 입력 : ");
