@@ -9,23 +9,22 @@ public class User {
 	Scanner sc = new Scanner(System.in);
 	ArrayList<priceList> pList = null;
 	priceList myList = new priceList();
+	int total = 0;
 
 	User(ArrayList<priceList> p) {
-		pList = p;
+		this.pList = p;
 	}
 
 	public void menu() {
+		System.out.println(name + "님 남은 시간 : " + myList.time);
 		viewTime();
-		for (int i = 0; i < pList.size(); i++) {
-			System.out.print("가격 : " + pList.get(i).price);
-			System.out.println("");
-			System.out.print("시간 : " + pList.get(i).time);
-			System.out.println("");
-		}
 		while (true) {
-
-			System.out.println("충전하시겠습니까?");
-			System.out.println("1 : 충전  /  2 : 남은시간 조회  /  3 : 로그아웃");
+			System.out.println("");
+			System.out.println("최대 충전 시간은" + pList.get(pList.size() - 1).time + "시간 입니다.");
+			System.out.println("");
+			System.out.println("1 : 충전");
+			System.out.println("2 : 남은시간 조회");
+			System.out.println("3 : 로그아웃");
 			String selNum = sc.nextLine();
 			if (selNum.equals("1")) {
 				addTime();
@@ -51,6 +50,14 @@ public class User {
 	}
 
 	public void viewTime() {
-		System.out.println(name + "님 남은 시간 : " + myList.time);
+		System.out.println("<<< \t시\t간\t표\t >>>");
+		for (int i = 0; i < pList.size(); i++) {
+			System.out.print(pList.get(i).price + "\t");
+		}
+		System.out.println("");
+		for (int i = 0; i < pList.size(); i++) {
+			System.out.print(pList.get(i).time + "시간\t");
+		}
+		System.out.println("");
 	}
 }

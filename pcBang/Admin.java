@@ -5,35 +5,40 @@ import java.util.Scanner;
 
 public class Admin {
 	ArrayList<User> Users = new ArrayList<>();
-	User loginUser = null;
+	ArrayList<User> loginUsers = new ArrayList<>();
 	ArrayList<priceList> prices = new ArrayList<>();
+	User loginUser = null;
 	Scanner sc = new Scanner(System.in);
 	int wallet = 0;
+	int cnt = 0;
 
 	Admin() {
-		System.out.println("PC방");
-		System.out.println("사장님 지갑 : " + wallet);
+		System.out.println("<< 백승한초롱 PC방 >>");
+		System.out.println("");
 		while (true) {
-			menu();
+			adminMenu();
+			System.out.println("");
 			System.out.println("메뉴를 선택해주세요");
 			String selMenu = sc.nextLine();
 			if (selMenu.equals("1")) {
-				register();
-			} else if (selMenu.equals("2")) {
 				addPrice();
-			} else if (selMenu.equals("3")) {
-				login();
-			} else if (selMenu.equals("4")) {
+			} else if (selMenu.equals("2")) {
 				seeWallet();
-			} else if (selMenu.equals("5")) {
-				// 아직 기능 없음
+			} else if (selMenu.equals("3")) {
+				register();
+			} else if (selMenu.equals("4")) {
+				login();
 			}
 		}
 	}
 
 	private void seeWallet() {
-		wallet = loginUser.myList.price;
+		for (int i = 0; i < loginUsers.size(); i++) {
+			wallet += loginUsers.get(i).myList.price;
+		}
+
 		System.out.println("사장님 지갑 : " + wallet);
+		wallet = 0;
 	}
 
 	private void login() {
@@ -45,8 +50,25 @@ public class Admin {
 			if (inputID.equals(Users.get(i).name)) {
 				if (inputPW.equals(Users.get(i).pw)) {
 					loginUser = Users.get(i);
+					if (cnt == 0) { // 최초 로그인 유저
+						loginUsers.add(loginUser);
+						cnt++;
+					} else {
+						loginCheck(loginUser);
+					}
 					loginUser.menu();
 				}
+			}
+		}
+	}
+
+	private void loginCheck(User loginUser) {
+		for (int i = 0; i < loginUsers.size(); i++) {
+			if (loginUsers.get(i).name.equals(loginUser.name)) {
+				loginUsers.remove(i);
+				loginUsers.add(loginUser);
+			} else {
+				loginUsers.add(loginUser);
 			}
 		}
 	}
@@ -60,12 +82,12 @@ public class Admin {
 		myP.time = sc.nextInt();
 		sc.nextLine();
 		prices.add(myP);
-		System.out.println("가격 : " + prices.get(0).price);
-		System.out.println("시간 : " + prices.get(0).time);
+		System.out.println("가격 : " + prices.get(0).price + "원");
+		System.out.println("시간 : " + prices.get(0).time + "시간");
 	}
 
 	private void register() {
-		User user = new User(prices);
+		User user = new User(this.prices);
 		System.out.println("이름 입력 : ");
 		user.name = sc.nextLine();
 		System.out.println("휴대폰 뒷번호 4자리 입력 : ");
@@ -75,11 +97,14 @@ public class Admin {
 		Users.add(user);
 	}
 
-	private void menu() {
-		System.out.println("1. 회원가입");
-		System.out.println("2. 시간표 책정하기");
-		System.out.println("3. 로그인");
-		System.out.println("4. 지갑보기 - 사장님꺼");
+	private void adminMenu() {
+		System.out.println("ADMIN MENU");
+		System.out.println("1. 요금책정 💰");
+		System.out.println("2. 지갑보기 💸");
+		System.out.println("");
+		System.out.println("USER MENU");
+		System.out.println("3. 회원가입 👱‍");
+		System.out.println("4. 접속하기 🔑");
 
 	}
 }
