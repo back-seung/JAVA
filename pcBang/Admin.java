@@ -11,6 +11,7 @@ public class Admin {
 	Scanner sc = new Scanner(System.in);
 	int wallet = 0;
 	int cnt = 0;
+	String adminPW = "admin";
 
 	Admin() {
 		System.out.println("<< 백승한초롱 PC방 >>");
@@ -33,12 +34,18 @@ public class Admin {
 	}
 
 	private void seeWallet() {
-		for (int i = 0; i < loginUsers.size(); i++) {
-			wallet += loginUsers.get(i).myList.price;
-		}
+		System.out.println("ADMIN 비밀번호 입력 : ");
+		String inputPw = sc.nextLine();
+		if (inputPw.equals(adminPW)) {
+			for (int i = 0; i < loginUsers.size(); i++) {
+				wallet += loginUsers.get(i).myList.price;
+			}
 
-		System.out.println("사장님 지갑 : " + wallet);
-		wallet = 0;
+			System.out.println("사장님 지갑 : " + wallet);
+			wallet = 0;
+		} else {
+			System.out.println("ERROR ! : 비밀번호 다름");
+		}
 	}
 
 	private void login() {
@@ -63,6 +70,7 @@ public class Admin {
 	}
 
 	private void loginCheck(User loginUser) {
+
 		for (int i = 0; i < loginUsers.size(); i++) {
 			if (loginUsers.get(i).name.equals(loginUser.name)) {
 				loginUsers.remove(i);
@@ -74,16 +82,21 @@ public class Admin {
 	}
 
 	private void addPrice() {
+		System.out.println("ADMIN 비밀번호 입력 : ");
+		String inputPw = sc.nextLine();
 		priceList myP = new priceList();
-
-		System.out.println("가격 입력");
-		myP.price = sc.nextInt();
-		System.out.println("시간 입력");
-		myP.time = sc.nextInt();
-		sc.nextLine();
-		prices.add(myP);
-		System.out.println("가격 : " + prices.get(0).price + "원");
-		System.out.println("시간 : " + prices.get(0).time + "시간");
+		if (inputPw.equals(adminPW)) {
+			System.out.println("가격 입력");
+			myP.price = sc.nextInt();
+			System.out.println("시간 입력");
+			myP.time = sc.nextInt();
+			sc.nextLine();
+			prices.add(myP);
+			System.out.println("가격 : " + prices.get(0).price + "원");
+			System.out.println("시간 : " + prices.get(0).time + "시간");
+		} else {
+			System.out.println("ERROR ! : 비밀번호 다름");
+		}
 	}
 
 	private void register() {

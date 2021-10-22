@@ -9,7 +9,6 @@ public class User {
 	Scanner sc = new Scanner(System.in);
 	ArrayList<priceList> pList = null;
 	priceList myList = new priceList();
-	int total = 0;
 
 	User(ArrayList<priceList> p) {
 		this.pList = p;
@@ -29,7 +28,7 @@ public class User {
 			if (selNum.equals("1")) {
 				addTime();
 			} else if (selNum.equals("2")) {
-				viewTime();
+				System.out.println(name + "님 남은 시간 : " + myList.time);
 			} else if (selNum.equals("3")) {
 				break;
 			}
