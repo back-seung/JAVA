@@ -32,7 +32,7 @@ public class Admin { // 회원가입 및 로그인 설정
 		}
 	}
 
-	private void checkTable() {
+	private void checkTable() { // 매니저가 생성한 요금표 조회
 
 		System.out.println("<<< \t시\t간\t표\t >>>");
 		for (int i = 0; i < prices.size(); i++) {
@@ -45,7 +45,7 @@ public class Admin { // 회원가입 및 로그인 설정
 		System.out.println("");
 	}
 
-	private void ManagerLogin() {
+	private void ManagerLogin() { // 매니저 로그인
 		System.out.println("ID 입력 : ");
 		String inputID = sc.nextLine();
 		System.out.println("PW 입력 : ");
@@ -57,31 +57,34 @@ public class Admin { // 회원가입 및 로그인 설정
 		}
 	}
 
-	private void UserLogin() {
+	private void UserLogin() { // 유저 로그인
+		Users = newM.getBlacked(); // 기능 실행시 블랙 당할 경우의 Users[]로 최신화
 		System.out.println("ID 입력 : ");
 		String inputID = sc.nextLine();
 		System.out.println("PW 입력 : ");
 		String inputPW = sc.nextLine();
 		for (int i = 0; i < Users.size(); i++) {
-			if (inputID.equals(Users.get(i).id) && inputPW.equals(Users.get(i).pw)) {
-				loginUser = Users.get(i);
-				if (cnt == 0) {
-					loginUsers.add(loginUser);
-					cnt++;
-				} else {
-					loginCheck(loginUser);
+			if (inputID.equals(Users.get(i).id)) {
+				if (inputPW.equals(Users.get(i).pw)) {
+					loginUser = Users.get(i);
+					if (cnt == 0) { // 최초 유저 로그인
+						loginUsers.add(loginUser);
+						cnt++;
+					} else { // 최초 아닌 유저's
+						loginCheck(loginUser);
+					}
+					loginUser.loginMenu();
 				}
-				loginUser.loginMenu();
 			}
 		}
 	}
 
-	private void loginCheck(User loginUser) {
+	private void loginCheck(User loginUser) { // 유저의 로그인 기록을 조회
 		for (int i = 0; i < loginUsers.size(); i++) {
-			if (loginUsers.get(i).id.equals(loginUser)) {
+			if (loginUsers.get(i).id.equals(loginUser.id)) { // 기록이 있을 때 해당 기록 삭제 후 현재 기록 저장
 				loginUsers.remove(i);
 				loginUsers.add(loginUser);
-			} else {
+			} else { // 없을 때는 그냥 저장
 				loginUsers.add(loginUser);
 			}
 		}
@@ -98,7 +101,7 @@ public class Admin { // 회원가입 및 로그인 설정
 		System.out.println("5 : 유저 로그인");
 	}
 
-	private void ManagerRegister() {
+	private void ManagerRegister() { // 매니저 회원가입
 		newM = new Manager(this.Users, this.loginUsers);
 		System.out.println("ID 입력 ⬇");
 		newM.id = sc.nextLine();
@@ -106,7 +109,7 @@ public class Admin { // 회원가입 및 로그인 설정
 		newM.pw = sc.nextLine();
 	}
 
-	private void UserRegister() {
+	private void UserRegister() { // 유저 회원가입
 		User newU = new User(this.prices);
 		System.out.println("ID 입력 ⬇");
 		newU.id = sc.nextLine();
@@ -114,5 +117,9 @@ public class Admin { // 회원가입 및 로그인 설정
 		newU.pw = sc.nextLine();
 		Users.add(newU);
 		System.out.println(Users);
+	}
+
+	public ArrayList<User> getLogined() { // 매니저에게 로그인 기록을 넘겨줌
+		return loginUsers;
 	}
 }

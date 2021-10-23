@@ -10,7 +10,7 @@ public class User {
 	PriceList myP = new PriceList();
 	Scanner sc = new Scanner(System.in);
 
-	User(ArrayList<PriceList> prices) {
+	User(ArrayList<PriceList> prices) { // 생성자
 		showP = prices;
 	}
 
@@ -30,34 +30,36 @@ public class User {
 	}
 
 	private void seeTable() { // 시간 충전시 시간표 출력
-		System.out.println("<<\t시\t간\t표\t>>");
+		System.out.println("<<< \t시\t간\t표\t >>>");
 		for (int i = 0; i < showP.size(); i++) {
-			System.out.println("시간");
-			System.out.print(showP.get(i).setTime + "\t");
-			System.out.println("");
-			System.out.println("가격");
 			System.out.print(showP.get(i).setPrice + "\t");
-			System.out.println("");
 		}
+		System.out.println("");
+		for (int i = 0; i < showP.size(); i++) {
+			System.out.print(showP.get(i).setTime + "시간\t");
+		}
+		System.out.println("");
 	}
 
 	private void showMyTime() { // 현재까지 충전한 시간 조회
 		System.out.println(id + "님 남은시간 : " + myP.setTime);
 	}
 
-	public void loginMenu() {
+	public void loginMenu() { // 로그인시 메뉴 출력
 		System.out.println("안녕하세요" + id + "유저님\t");
 		while (true) {
 			System.out.println("1 . 시간 충전");
 			System.out.println("2 . 내 남은 시간 조회");
-			System.out.println("3 . 로그아웃");
-
+			System.out.println("3 . 요금표 보기");
+			System.out.println("4 . 로그아웃");
 			String selMenu = sc.nextLine();
 			if (selMenu.equals("1")) {
 				addTime();
 			} else if (selMenu.equals("2")) {
 				showMyTime();
 			} else if (selMenu.equals("3")) {
+				seeTable();
+			} else if (selMenu.equals("4")) {
 				break;
 			}
 		}
