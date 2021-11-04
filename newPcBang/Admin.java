@@ -28,7 +28,6 @@ public class Admin { // 회원가입 및 로그인 설정
 			} else if (selMenu.equals("5")) {
 				UserLogin();
 			}
-
 		}
 	}
 
