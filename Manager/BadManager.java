@@ -7,13 +7,12 @@ import DTO.Schedule;
 
 public class BadManager {
 	private ScheduleManager baek = null;
-	private ArrayList<Schedule> dontTouch = null;
 	private Scanner sc = new Scanner(System.in);
 	private ArrayList<Schedule> BadSList = new ArrayList<>(); // 별도 관리
+	
 
 	BadManager(ScheduleManager b) {
 		this.baek = b;
-		dontTouch = baek.getMyS();
 	}
 
 	public void loginMenu() {
@@ -43,13 +42,14 @@ public class BadManager {
 
 	private void addBad() {
 		System.out.println("나쁜 스케줄 i 번호입력");
-		for (int i = 0; i < dontTouch.size(); i++) {
+		ArrayList<Schedule> sBadList = baek.getMyS();
+		for (int i = 0; i < sBadList.size(); i++) {
 			System.out.println("##### NO : " + i + " ####");
-			dontTouch.get(i).prt();
+			sBadList.get(i).prt();
 		}
 		int selNo = sc.nextInt();
 		sc.nextLine();
-		BadSList.add(dontTouch.get(selNo));
+		BadSList.add(sBadList.get(selNo));
 	}
 
 	private void viewAll() {

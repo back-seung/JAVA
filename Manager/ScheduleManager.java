@@ -11,7 +11,8 @@ public class ScheduleManager {
 	ArrayList<Schedule> myS = new ArrayList<>();
 	private Upgrade baek = new Upgrade(getMyS());
 	private BadManager badM = new BadManager(this);
-	private PartManager partM = new PartManager();
+	private PartManager partM = new PartManager(this);
+	private FinalManager finalM = new FinalManager(this);
 
 	public ArrayList<Schedule> getMyS() {
 		return myS;
@@ -44,6 +45,13 @@ public class ScheduleManager {
 				break;
 			case "7":
 				badM.loginMenu();
+				break;
+			case "8":
+				partM.loginMenu();
+				break;
+			case "9":
+				finalM.loginMenu();
+				break;
 			default:
 				flag = false;
 			}
@@ -101,8 +109,7 @@ public class ScheduleManager {
 	private void listSchedule() {
 		System.out.println("전체 스케줄 조회 중...");
 		for (int i = 0; i < myS.size(); i++) {
-			System.out.println("제목 : " + myS.get(i).getsName());
-			System.out.println("내용 : " + myS.get(i).getsDescription());
+			myS.get(i).prt();
 		}
 		System.out.println("끝");
 	}
@@ -114,7 +121,9 @@ public class ScheduleManager {
 		System.out.println("4. 검색");
 		System.out.println("5. 전체조회");
 		System.out.println("6. UPGRADE");
-		System.out.println("7. BAD SCHEDULE");
+		System.out.println("7. 나쁜 스케쥴 관리");
+		System.out.println("8. 스케줄 매니저 지정");
+		System.out.println("9. 스케줄 날짜 지정");
 	}
 
 	private void init() {
